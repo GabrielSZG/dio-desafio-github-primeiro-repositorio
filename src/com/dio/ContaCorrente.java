@@ -12,6 +12,6 @@ public class ContaCorrente extends Conta {
 	public void imprimirExtrato() {
 		System.out.println("== Extrato Conta Corrente ==");
 		super.imprimirInfosComuns();
-		System.out.println(String.format("Limite: %.2f\n", ContaCorrente.LIMITE + saldo));
+		System.out.println(String.format("Limite: R$ %.2f\n", ContaCorrente.LIMITE + saldo));
 	}
 }
