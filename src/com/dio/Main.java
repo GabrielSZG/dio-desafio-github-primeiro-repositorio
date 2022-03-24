@@ -23,19 +23,19 @@ public class Main {
 		// escolha entre conta corrente (CC) ou conta poupança (CI)
 		String tipoConta;
 		System.out.print("Escolha qual o tipo de conta (CC ou CI): ");
-		tipoConta = leitor.nextLine();
+		tipoConta = leitor.nextLine().toUpperCase();
 
 		switch (tipoConta) {
 		case "CC":
 			System.out.print("Quanto quer depositar?: ");
-			corrente.depositar(leitor.nextDouble());
+			corrente.depositar(leitor.nextBigDecimal());
 			System.out.println();
 			corrente.imprimirExtrato();
 			poupanca.imprimirExtrato();
 			break;
 		case "CI":
 			System.out.print("Quanto quer depositar?: ");
-			poupanca.depositar(leitor.nextDouble());
+			poupanca.depositar(leitor.nextBigDecimal());
 			System.out.println();
 			corrente.imprimirExtrato();
 			poupanca.imprimirExtrato();

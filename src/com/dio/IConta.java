@@ -1,12 +1,14 @@
 package com.dio;
 
+import java.math.BigDecimal;
+
 public interface IConta {
 	
-	void sacar(double valor);
+	void sacar(BigDecimal valor);
 	
-	void depositar(double valor);
+	void depositar(BigDecimal valor);
 		
-	void transferir(double valor, IConta contaDestino);
+	void transferir(BigDecimal valor, IConta contaDestino);
 	
 	void imprimirExtrato();
 }

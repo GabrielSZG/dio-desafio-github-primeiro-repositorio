@@ -1,21 +1,24 @@
 package com.dio;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public abstract class Conta implements IConta {
-	
+
 	private static final int AGENCIA_PADRAO = 1;
 	private static int SEQUENCIAL = 1;
-	
+
 	protected int agencia;
 	protected int numero;
-	protected double saldo;
+	protected BigDecimal saldo = BigDecimal.ZERO;
 	private Cliente cliente;
-	
+
 	public Conta(Cliente cliente) {
 		this.agencia = Conta.AGENCIA_PADRAO;
 		this.numero = SEQUENCIAL++;
 		this.cliente = cliente;
 	}
-	
+
 	public int getAgencia() {
 		return agencia;
 	}
@@ -24,30 +27,30 @@ public abstract class Conta implements IConta {
 		return numero;
 	}
 
-	public double getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
 	@Override
-	public void sacar(double valor) {
-		saldo -= valor;
+	public void sacar(BigDecimal valor) {
+		saldo = saldo.subtract(valor).setScale(2, RoundingMode.HALF_UP);
 	}
 
 	@Override
-	public void depositar(double valor) {
-		saldo += valor;
+	public void depositar(BigDecimal valor) {
+		saldo = saldo.add(valor).setScale(2, RoundingMode.HALF_UP);
 	}
 
 	@Override
-	public void transferir(double valor, IConta contaDestino) {
+	public void transferir(BigDecimal valor, IConta contaDestino) {
 		this.sacar(valor);
 		contaDestino.depositar(valor);
 	}
-	
+
 	protected void imprimirInfosComuns() {
-		System.out.println(String.format("Titular: %s", this.cliente.getNome()));
-		System.out.println(String.format("Agencia: %d", this.agencia));
-		System.out.println(String.format("Conta: %d", this.numero));
-		System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
+		System.out.println("Titular: " + this.cliente.getNome());
+		System.out.println("Agencia: " + this.agencia);
+		System.out.println("Conta: " + this.numero);
+		System.out.println("Saldo: R$ " + this.saldo);
 	}
 }
